@@ -10,8 +10,10 @@ function Menu() {
   const [searchTerm, setSearchTerm] = useState("");
   const [repoList, setRepoList] = useState();
   const [tempInfo, setTempInfo] = useState({});
+  const [updateui,setUpdateui] = useState(true);
 
   const gerUserInfo = async () => {
+    setUpdateui(false);
     try { 
       // aakash2018
       // https://api.github.com/users/${searchTerm}/repos?per_page=100&page=1%22%202%3E/dev/null%20|%20jq%20-r%20%27.[]%20|%20.name
@@ -19,7 +21,8 @@ function Menu() {
 
        await axios.get(url).then((res)=>{
                     console.log(res.data)
-                    setRepoList(res.data)
+                    setRepoList(res.data);
+                    setUpdateui(true);
       });
       
      } catch (error) {
@@ -63,8 +66,11 @@ function Menu() {
         </div>
       
       {/* This the the  details page */}
-            
+            {updateui ?
+            <>
        {repoList && <MenuItem data={repoList}/>}
+            </>
+          :""}
         
     
     </div>

@@ -94,7 +94,7 @@ function MenuItem(props) {
       id: 'full_name',
       numeric: false,
       disablePadding: false,
-      label: 'Public Repo',
+      label: 'Repo type',
     },
     {
       id: 'fat',
@@ -112,7 +112,7 @@ function MenuItem(props) {
       id: 'protein',
       numeric: false,
       disablePadding: false,
-      label: 'Protein (g)',
+      label: 'Rating',
     },
   ];
 
@@ -126,15 +126,7 @@ function MenuItem(props) {
       <TableHead>
         <TableRow>
           <TableCell padding="checkbox">
-            {/* <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            
-            inputProps={{
-              'aria-label': 'select all desserts',
-            }}
-          /> */}
+         
           </TableCell>
           {headCells.map((headCell) => {
             console.log("headCell", headCell)
@@ -255,7 +247,7 @@ function MenuItem(props) {
   const isSelected = (name) => selected.indexOf(name) !== -1;
   return (
     <div>
-    {propsDataLength==0?(<h2>{"No Data Found"}</h2>):
+    {propsDataLength==undefined||propsDataLength==0 ?(<h2>{"No Data Found"}</h2>):
       <Paper sx={{ width: '100%', mb: 2, overflow: 'hidden' }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
@@ -291,13 +283,7 @@ function MenuItem(props) {
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
-                        {/* <Checkbox
-                          color="primary"
-                          checked={isItemSelected}
-                          inputProps={{
-                            'aria-labelledby': labelId,
-                          }}
-                        /> */}
+                       
                       </TableCell>
                       <TableCell
                         component="th"
