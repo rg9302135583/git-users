@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 // import { MenuList } from "../helpers/MenuList";
 import MenuItem from "../components/MenuItem";
 import "../styles/Menu.css";
-import "../styles/style.css"
+// import "../styles/style.css"
 
 
 function Menu() {
@@ -41,7 +41,7 @@ function Menu() {
       //   sunset,
       // };
 
-      
+
       // setTempInfo(myNewWeatherInfo);
       // console.log(data);
     } catch (error) {

@@ -38,9 +38,10 @@ function createData(name, full_name, fat, carbs, protein) {
   };
 }
 console.log("propsData",propsData)
-const rows = propsData.map(async(dt)=>{
-  console.log(dt)
-  return createData("name", dt.full_name, 3.7, 67, 4.3)
+const rows =[]
+ const addrows = propsData.map(async(dt)=>{
+  console.log("dt",dt.Object[0].name)
+  return createData("", dt.Object[0].full_name, 3.7, 67, 4.3)
 })
 // const rows=props
 // const rows = [
@@ -134,8 +135,8 @@ function EnhancedTableHead(props) {
             }}
           /> */}
         </TableCell>
-        {headCells.map((headCell) => {
-          console.log("headCell",headCell)
+        {headCells.map((headCell, index) => {
+          console.log("headCell",index ,"/",headCell )
           return (
           <TableCell
             key={headCell.id}
