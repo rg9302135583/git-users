@@ -4,13 +4,18 @@ import BannerImage from "../assets/food.jpeg";
 import "../styles/Home.css";
 
 function Home() {
+
+
+
+
+
   return (
     <div className="home" style={{ backgroundImage: `url(${BannerImage})` }}>
       <div className="headerContainer">
-        <h1 style={{ fontWeight: "bold" }}> Home Page </h1>
+        {/* <h1 style={{ fontWeight: "bold" }}> Home Page </h1> */}
         <p>Git HUB Users List</p>
         <Link to="/menu">
-          <button> List Now </button>
+          <button> Search Now </button>
         </Link>
       </div>
     </div>
