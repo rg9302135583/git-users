@@ -6,7 +6,7 @@ import "../styles/Menu.css";
 
 
 function Menu() {
-  const [searchTerm, setSearchTerm] = useState("rg9302135583");
+  const [searchTerm, setSearchTerm] = useState("aakash2018");
   const [repoList, setRepoList] = useState();
   const [tempInfo, setTempInfo] = useState({});
 
@@ -86,7 +86,7 @@ function Menu() {
       
       {/* This the the  details page */}
       
-       {repoList&& <MenuItem {...repoList}/>}
+       {repoList&& <MenuItem data={repoList}/>}
         
     
     </div>

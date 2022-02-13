@@ -23,109 +23,103 @@ import { visuallyHidden } from '@mui/utils';
 
 
 function MenuItem(props) {
-  const [propsData, setPropsData]=useState([props])
-console.log("props", props)
-// useEffect(()=>{
-//   setPropsData(props)
-// },[])
-function createData(name, full_name, fat, carbs, protein) {
-  return {
-    name,
-    full_name,
-    fat,
-    carbs,
-    protein,
-  };
-}
-console.log("propsData",propsData)
-const rows =[]
- const addrows = propsData.map(async(dt)=>{
-  console.log("dt",dt.Object[0].name)
-  return createData("", dt.Object[0].full_name, 3.7, 67, 4.3)
-})
-// const rows=props
-// const rows = [
-//   createData("name", props.full_name, 3.7, 67, 4.3),
-//   createData("full_name", 452, 25.0, 51, 4.9),
+  const [propsData, setPropsData] = useState(props.data)
   
-// ];
+  // useEffect(()=>{
+  //   setPropsData(props)
+  // },[])
 
-
-function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
+  function createData(name, full_name, fat, carbs, protein) {
+    return {
+      name,
+      full_name,
+      fat,
+      carbs,
+      protein,
+    };
   }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
 
-function getComparator(order, orderBy) {
-  return order === 'desc'
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-}
-
-// This method is created for cross-browser compatibility, if you don't
-// need to support IE11, you can use Array.prototype.sort() directly
-function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) {
-      return order;
-    }
-    return a[1] - b[1];
+  const rows = propsData?.map((dt, index) => {
+    return createData(propsData[index].name, propsData[index].visibility, propsData[index].full_name, propsData[index].git_url, 4.3);
   });
-  return stabilizedThis.map((el) => el[0]);
-}
 
-const headCells = [
-  {
-    id: 'name',
-    numeric: false,
-    disablePadding: true,
-    label: 'User Name',
-  },
-  {
-    id: 'full_name',
-    numeric: false,
-    disablePadding: false,
-    label: 'Public_Repo',
-  },
-  {
-    id: 'fat',
-    numeric: false,
-    disablePadding: false,
-    label: 'Full Name',
-  },
-  {
-    id: 'carbs',
-    numeric: false,
-    disablePadding: false,
-    label: 'url',
-  },
-  {
-    id: 'protein',
-    numeric: false,
-    disablePadding: false,
-    label: 'Protein (g)',
-  },
-];
+  console.log(rows);
 
-function EnhancedTableHead(props) {
-  const { order, orderBy, numSelected, rowCount, onRequestSort } =
-    props;
-  const createSortHandler = (property) => (event) => {
-    onRequestSort(event, property);
-  };
+  function descendingComparator(a, b, orderBy) {
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;
+  }
 
-  return (
-    <TableHead>
-      <TableRow>
-        <TableCell padding="checkbox">
-          {/* <Checkbox
+  function getComparator(order, orderBy) {
+    return order === 'desc'
+      ? (a, b) => descendingComparator(a, b, orderBy)
+      : (a, b) => -descendingComparator(a, b, orderBy);
+  }
+
+  // This method is created for cross-browser compatibility, if you don't
+  // need to support IE11, you can use Array.prototype.sort() directly
+  function stableSort(array, comparator) {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+      const order = comparator(a[0], b[0]);
+      if (order !== 0) {
+        return order;
+      }
+      return a[1] - b[1];
+    });
+    return stabilizedThis.map((el) => el[0]);
+  }
+
+  const headCells = [
+    {
+      id: 'name',
+      numeric: false,
+      disablePadding: true,
+      label: 'User Name',
+    },
+    {
+      id: 'full_name',
+      numeric: false,
+      disablePadding: false,
+      label: 'Public Repo',
+    },
+    {
+      id: 'fat',
+      numeric: false,
+      disablePadding: false,
+      label: 'Full Name',
+    },
+    {
+      id: 'carbs',
+      numeric: false,
+      disablePadding: false,
+      label: 'url',
+    },
+    {
+      id: 'protein',
+      numeric: false,
+      disablePadding: false,
+      label: 'Protein (g)',
+    },
+  ];
+
+  function EnhancedTableHead(props) {
+    const { order, orderBy, numSelected, rowCount, onRequestSort } =
+      props;
+    const createSortHandler = (property) => (event) => {
+      onRequestSort(event, property);
+    };
+
+    return (
+      <TableHead>
+        <TableRow>
+          <TableCell padding="checkbox">
+            {/* <Checkbox
             color="primary"
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
@@ -134,77 +128,79 @@ function EnhancedTableHead(props) {
               'aria-label': 'select all desserts',
             }}
           /> */}
-        </TableCell>
-        {headCells.map((headCell, index) => {
-          console.log("headCell",index ,"/",headCell )
-          return (
-          <TableCell
-            key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'normal'}
-            sortDirection={orderBy === headCell.id ? order : false}
-            variant="h5"
-          >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <Box component="span" sx={visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </Box>
-              ) : null}
-            </TableSortLabel>
           </TableCell>
-        )})}
-      </TableRow>
-    </TableHead>
-  );
-}
+          {headCells.map((headCell) => {
+            console.log("headCell", headCell)
+            return (
+              <TableCell
+                key={headCell.id}
+                align={headCell.numeric ? 'right' : 'left'}
+                padding={headCell.disablePadding ? 'none' : 'normal'}
+                sortDirection={orderBy === headCell.id ? order : false}
+              >
+                <TableSortLabel
+                  active={orderBy === headCell.id}
+                  direction={orderBy === headCell.id ? order : 'asc'}
+                  onClick={createSortHandler(headCell.id)}
+                >
+                  {headCell.label}
+                  {orderBy === headCell.id ? (
+                    <Box component="span" sx={visuallyHidden}>
+                      {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                    </Box>
+                  ) : null}
+                </TableSortLabel>
+              </TableCell>
+            )
+          })}
+        </TableRow>
+      </TableHead>
+    );
+  }
 
-EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
-};
+  EnhancedTableHead.propTypes = {
+    numSelected: PropTypes.number.isRequired,
+    onRequestSort: PropTypes.func.isRequired,
+    order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+    orderBy: PropTypes.string.isRequired,
+    rowCount: PropTypes.number.isRequired,
+  };
 
-const EnhancedTableToolbar = (props) => {
-  const { numSelected } = props;
-  console.log("EnhancedTableToolbar-props", props)
-  return (
-    <Toolbar
-      sx={{
-        pl: { sm: 2 },
-        pr: { xs: 1, sm: 1 },
-        ...(numSelected > 0 && {
-          bgcolor: (theme) =>
-            alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
-        }),
-      }}
-    >
-      <Typography
-        sx={{ flex: '1 1 100%' }}
-        variant="h5"
-        id="tableTitle"
-        component="div"
+  const EnhancedTableToolbar = (props) => {
+    const { numSelected } = props;
+    console.log("EnhancedTableToolbar-props", props)
+    return (
+      <Toolbar
+        sx={{
+          pl: { sm: 2 },
+          pr: { xs: 1, sm: 1 },
+          ...(numSelected > 0 && {
+            bgcolor: (theme) =>
+              alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
+          }),
+        }}
       >
-        User Public_Repo List
-      </Typography>
-    </Toolbar>
-  );
-};
+        <Typography
+          sx={{ flex: '1 1 100%' }}
+          variant="h5"
+          id="tableTitle"
+          component="div"
+        >
+          User Public_Repo List
+        </Typography>
+      </Toolbar>
+    );
+  };
 
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-};
+  EnhancedTableToolbar.propTypes = {
+    numSelected: PropTypes.number.isRequired,
+  };
 
 
-// function MenuItem(props) {
+  // function MenuItem(props) {
   console.log("props - rows", props)
+
+  // rows = props;
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('Public_Repo');
   const [selected, setSelected] = React.useState([]);
@@ -252,8 +248,8 @@ EnhancedTableToolbar.propTypes = {
   const isSelected = (name) => selected.indexOf(name) !== -1;
   return (
     <div >
-    
-      <Paper sx={{ width: '100%', mb: 2 ,overflow: 'hidden'}}>
+
+      <Paper sx={{ width: '100%', mb: 2, overflow: 'hidden' }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
@@ -266,7 +262,7 @@ EnhancedTableToolbar.propTypes = {
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={rows?.length}
             />
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
@@ -274,17 +270,17 @@ EnhancedTableToolbar.propTypes = {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row?.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                      onClick={(event) => handleClick(event, row?.name)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row?.name}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -302,16 +298,16 @@ EnhancedTableToolbar.propTypes = {
                         scope="row"
                         padding="none"
                       >
-                        {row.name}
+                        {row?.name}
                       </TableCell>
-                      <TableCell align="right">{row.Public_Repo}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      <TableCell align="right">{row?.full_name}</TableCell>
+                      <TableCell align="right">{row?.fat}</TableCell>
+                      <TableCell align="right">{row?.carbs}</TableCell>
+                      <TableCell align="right">{row?.protein}</TableCell>
                     </TableRow>
                   );
                 })}
-             
+
             </TableBody>
           </Table>
         </TableContainer>
