@@ -23,12 +23,10 @@ import { visuallyHidden } from '@mui/utils';
 
 
 function MenuItem(props) {
+  console.log("props", props)
   const [propsData, setPropsData] = useState(props.data)
-  
-  // useEffect(()=>{
-  //   setPropsData(props)
-  // },[])
-
+  const [rows,setRows]=useState([])
+  const propsDataLength = propsData.length
   function createData(name, full_name, fat, carbs, protein) {
     return {
       name,
@@ -38,11 +36,21 @@ function MenuItem(props) {
       protein,
     };
   }
-
-  const rows = propsData?.map((dt, index) => {
-    return createData(propsData[index].name, propsData[index].visibility, propsData[index].full_name, propsData[index].git_url, 4.3);
-  });
-
+  useEffect(()=>{
+    setPropsData(props.data)
+      setRows(
+        propsData?.map((dt, index) => {
+          return createData(propsData[index].name, propsData[index].visibility, propsData[index].full_name, propsData[index].git_url, 4.3);
+        })
+      )
+  },[])
+  console.log("propsDataLength",propsDataLength)
+  //  rows = propsData?.map((dt, index) => {
+  //   return createData(propsData[index].name, propsData[index].visibility, propsData[index].full_name, propsData[index].git_url, 4.3);
+  // });
+  // useEffect(()=>{
+  //   setRows(rowsHandler)
+  // },[props])
   console.log(rows);
 
   function descendingComparator(a, b, orderBy) {
@@ -114,7 +122,6 @@ function MenuItem(props) {
     const createSortHandler = (property) => (event) => {
       onRequestSort(event, property);
     };
-
     return (
       <TableHead>
         <TableRow>
@@ -155,8 +162,8 @@ function MenuItem(props) {
           })}
         </TableRow>
       </TableHead>
-    );
-  }
+    );}
+  
 
   EnhancedTableHead.propTypes = {
     numSelected: PropTypes.number.isRequired,
@@ -247,8 +254,8 @@ function MenuItem(props) {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
   return (
-    <div >
-
+    <div>
+    {propsDataLength==0?(<h2>{"No Data Found"}</h2>):
       <Paper sx={{ width: '100%', mb: 2, overflow: 'hidden' }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
@@ -321,10 +328,9 @@ function MenuItem(props) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      {/* <div style={{ backgroundImage: `url(${image})` }}> </div>
-      <h1> {name} </h1>
-      <p> ₹{price} </p> */}
+}
     </div>
+    
   );
 }
 

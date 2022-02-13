@@ -1,3 +1,4 @@
+import axios from "axios";
 import React,{useState,useEffect} from "react";
 // import { MenuList } from "../helpers/MenuList";
 import MenuItem from "../components/MenuItem";
@@ -6,51 +7,28 @@ import "../styles/Menu.css";
 
 
 function Menu() {
-  const [searchTerm, setSearchTerm] = useState("aakash2018");
+  const [searchTerm, setSearchTerm] = useState("");
   const [repoList, setRepoList] = useState();
   const [tempInfo, setTempInfo] = useState({});
 
-  const getWeatherInfo = async () => {
-    try {
+  const gerUserInfo = async () => {
+    try { 
+      // aakash2018
       // https://api.github.com/users/${searchTerm}/repos?per_page=100&page=1%22%202%3E/dev/null%20|%20jq%20-r%20%27.[]%20|%20.name
       let url = `https://api.github.com/users/${searchTerm}/repos?per_page=100&page=1%22%202%3E/dev/null%20|%20jq%20-r%20%27.[]%20|%20.name`;
 
-      let res = await fetch(url);
-      let data = await res.json();
-      // const { temp, humidity, pressure } = data.main;
-      // const { main: weatherType } = data.weather[0];
-      let JsonData=data && data.map((dt)=>{
-          console.log("dt.name =:",dt.name)
-          return dt.name
-      })
-      console.log("JsonData ",data) ;
-      setRepoList(data)
-      // const { speed } = data.wind;
-      // const { country, sunset } = data.sys;
-      console.log("res",res)
-      // console.log("name",name )
-      console.log("data",data.length )
-      // const myNewWeatherInfo = {
-      //   temp,
-      //   humidity,
-      //   pressure,
-      //   weatherType,
-      //   name,
-      //   speed,
-      //   country,
-      //   sunset,
-      // };
-
-
-      // setTempInfo(myNewWeatherInfo);
-      // console.log(data);
-    } catch (error) {
+       await axios.get(url).then((res)=>{
+                    console.log(res.data)
+                    setRepoList(res.data)
+      });
+      
+     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getWeatherInfo();
+    gerUserInfo();
   }, []);
 
 
@@ -79,14 +57,14 @@ function Menu() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <button className="searchButton" onClick={getWeatherInfo}>
+          <button className="searchButton" onClick={gerUserInfo}>
             Search
           </button>
         </div>
       
       {/* This the the  details page */}
-      
-       {repoList&& <MenuItem data={repoList}/>}
+            
+       {repoList && <MenuItem data={repoList}/>}
         
     
     </div>
