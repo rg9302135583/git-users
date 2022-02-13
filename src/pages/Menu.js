@@ -41,6 +41,7 @@ function Menu() {
       //   sunset,
       // };
 
+      
       // setTempInfo(myNewWeatherInfo);
       // console.log(data);
     } catch (error) {
