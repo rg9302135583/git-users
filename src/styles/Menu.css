@@ -1,3 +1,4 @@
+
 .menu {
   width: 100%;
   height: auto;
@@ -5,6 +6,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  /* background-image: url(${BannerImage}); */
 }
 .menu .menuTitle {
   /* font-family: cursive; */
@@ -48,6 +50,46 @@
 .menuItem p {
   margin-left: 20px;
 }
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.searchTerm {
+  width: 50%;
+  /* border: 3px solid #00b4cc; */
+  border: none;
+  padding: 16px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  font-size: 18px;
+}
+
+.searchTerm:focus {
+  color: #00b4cc;
+}
+
+.searchButton {
+  width: 80px;
+  height: 32px;
+  border: none;
+  background: #048b9c;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+  outline: none;
+  font-size: 16px;
+}
+
+.searchButton:hover {
+  background-color: #17b8ce;
+}
+
 
 @media only screen and (max-width: 1300px) {
   .menuList {

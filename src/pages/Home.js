@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import BannerImage from "../assets/food.jpeg";
+import BannerImage from "../assets/hexagons-of-different-sizes-on-a-blue-background-vector.jpg";
 import "../styles/Home.css";
 
 function Home() {

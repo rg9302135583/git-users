@@ -2,6 +2,7 @@ import axios from "axios";
 import React,{useState,useEffect} from "react";
 // import { MenuList } from "../helpers/MenuList";
 import MenuItem from "../components/MenuItem";
+import BannerImage from "../assets/hexagons-of-different-sizes-on-a-blue-background-vector.jpg";
 import "../styles/Menu.css";
 // import "../styles/style.css"
 
@@ -18,11 +19,21 @@ function Menu() {
       // aakash2018
       // https://api.github.com/users/${searchTerm}/repos?per_page=100&page=1%22%202%3E/dev/null%20|%20jq%20-r%20%27.[]%20|%20.name
       let url = `https://api.github.com/users/${searchTerm}/repos?per_page=100&page=1%22%202%3E/dev/null%20|%20jq%20-r%20%27.[]%20|%20.name`;
-
+     
        await axios.get(url).then((res)=>{
                     console.log(res.data)
                     setRepoList(res.data);
                     setUpdateui(true);
+                    let readme_url = `https://github.com/${searchTerm}/git-users/blob/main/README.md`
+                    function downloadURI() {
+                      var link = document.createElement("a");
+                      link.download = `https://github.com/${searchTerm}/git-users/blob/main/README.md`;
+                      link.href = `https://github.com/${searchTerm}/git-users/blob/main/README.md`;
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                      
+                    }
       });
       
      } catch (error) {
@@ -36,8 +47,8 @@ function Menu() {
 
 
   return (
-    <div>
-        <div className="search">
+    <div style={{backgroundImage: `url(${BannerImage})`,minHeight:`100vh`}}>
+        <div className="search" >
           <input
             type="search"
             placeholder="User's Id or emailId.."
