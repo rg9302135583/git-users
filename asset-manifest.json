@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d2d1378e.chunk.css",
+    "main.js": "/static/js/main.bc3dbfe5.chunk.js",
+    "main.js.map": "/static/js/main.bc3dbfe5.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.112d2f2d.js",
+    "runtime~main.js.map": "/static/js/runtime~main.112d2f2d.js.map",
+    "static/js/2.202485d0.chunk.js": "/static/js/2.202485d0.chunk.js",
+    "static/js/2.202485d0.chunk.js.map": "/static/js/2.202485d0.chunk.js.map",
+    "static/js/3.7c81545f.chunk.js": "/static/js/3.7c81545f.chunk.js",
+    "static/js/3.7c81545f.chunk.js.map": "/static/js/3.7c81545f.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.62e1fa63fdf9dc8367fda21cf352e440.js": "/precache-manifest.62e1fa63fdf9dc8367fda21cf352e440.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.d2d1378e.chunk.css.map": "/static/css/main.d2d1378e.chunk.css.map",
+    "static/media/CDN-Logo.png": "/static/media/CDN-Logo.b1aa3ca9.png",
+    "static/media/IMG_20220215_084111.jpg": "/static/media/IMG_20220215_084111.605152f0.jpg",
+    "static/media/IMG_20220215_084139.jpg": "/static/media/IMG_20220215_084139.59f69e03.jpg",
+    "static/media/hexagons-of-different-sizes-on-a-blue-background-vector.jpg": "/static/media/hexagons-of-different-sizes-on-a-blue-background-vector.ebd31d4a.jpg"
+  }
+}
