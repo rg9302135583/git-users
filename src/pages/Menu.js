@@ -37,21 +37,6 @@ function Menu() {
 
   return (
     <div>
-
-    {/* // <div className="menu"> */}
-        {/* <div className="menuList"> */}
-        {/* {MenuList.map((menuItem, key) => { */}
-        {/* console.log("menuItem",menuItem) */}
-        {/* return ( */}
-        {/* <MenuItem
-              key={key}
-              image={menuItem.image}
-              name={menuItem.name}
-              price={menuItem.price}
-            /> */}
-        {/* ); */}
-        {/* })} */}
-        {/* <div className="wrap"> */}
         <div className="search">
           <input
             type="search"
