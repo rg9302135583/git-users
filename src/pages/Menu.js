@@ -41,16 +41,16 @@ function Menu() {
                     console.log(res.data)
                     setRepoList(res.data);
                     setUpdateui(true);
-                    let readme_url = `https://github.com/${searchTerm}/git-users/blob/main/README.md`
-                    // function downloadURI() {
-                    //   var link = document.createElement("a");
-                    //   link.download = `https://github.com/${searchTerm}/git-users/blob/main/README.md`;
-                    //   link.href = `https://github.com/${searchTerm}/git-users/blob/main/README.md`;
-                    //   document.body.appendChild(link);
-                    //   link.click();
-                    //   document.body.removeChild(link);
-                      
-                    // }
+                    let readme_url = `https://raw.githubusercontent.com/aakash2018/Amazon_Clone/main/README.md`
+                    function downloadURI() {
+                      var link = document.createElement("a");
+                      link.download = `https://raw.githubusercontent.com/aakash2018/Amazon_Clone/main/README.md`;
+                      link.href = `https://raw.githubusercontent.com/aakash2018/Amazon_Clone/main/README.md`;
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                    }
+                    downloadURI()
       });
       
      } catch (error) {
