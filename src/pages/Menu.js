@@ -5,13 +5,30 @@ import MenuItem from "../components/MenuItem";
 import BannerImage from "../assets/hexagons-of-different-sizes-on-a-blue-background-vector.jpg";
 import "../styles/Menu.css";
 // import "../styles/style.css"
-
+import { Octokit } from "@octokit/rest";
 
 function Menu() {
   const [searchTerm, setSearchTerm] = useState("");
   const [repoList, setRepoList] = useState();
   const [tempInfo, setTempInfo] = useState({});
   const [updateui,setUpdateui] = useState(true);
+  const octokit = new Octokit();
+
+  octokit.rest.repos
+  .listForOrg({
+    org: "octokit",
+    type: "public",
+  })
+  .then(({ data }) => {
+    // handle data
+    console.log("Octkkit data",data)
+  });
+
+  const requestOptions = octokit.rest.repos.get.endpoint({
+    owner: "rg9302135583",
+    // repo: "rest.js",
+  });
+  console.log("requestOptions",requestOptions)
 
   const gerUserInfo = async () => {
     setUpdateui(false);
@@ -25,15 +42,15 @@ function Menu() {
                     setRepoList(res.data);
                     setUpdateui(true);
                     let readme_url = `https://github.com/${searchTerm}/git-users/blob/main/README.md`
-                    function downloadURI() {
-                      var link = document.createElement("a");
-                      link.download = `https://github.com/${searchTerm}/git-users/blob/main/README.md`;
-                      link.href = `https://github.com/${searchTerm}/git-users/blob/main/README.md`;
-                      document.body.appendChild(link);
-                      link.click();
-                      document.body.removeChild(link);
+                    // function downloadURI() {
+                    //   var link = document.createElement("a");
+                    //   link.download = `https://github.com/${searchTerm}/git-users/blob/main/README.md`;
+                    //   link.href = `https://github.com/${searchTerm}/git-users/blob/main/README.md`;
+                    //   document.body.appendChild(link);
+                    //   link.click();
+                    //   document.body.removeChild(link);
                       
-                    }
+                    // }
       });
       
      } catch (error) {
