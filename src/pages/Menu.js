@@ -65,6 +65,7 @@ function Menu() {
 
   return (
     <div style={{backgroundImage: `url(${BannerImage})`,minHeight:`100vh`}}>
+          <h4>Please enter GitHub Username to find the public repositories of user.</h4>
         <div className="search" >
           <input
             type="search"
