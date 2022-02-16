@@ -14,13 +14,8 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
-
+var fileDownload = require('js-file-download');
 
 function MenuItem(props) {
   console.log("props", props)
@@ -40,7 +35,7 @@ function MenuItem(props) {
     setPropsData(props.data)
       setRows(
         propsData?.map((dt, index) => {
-          return createData(propsData[index].name, propsData[index].visibility, propsData[index].full_name, propsData[index].git_url, 4.3);
+          return createData(propsData[index].name, propsData[index].visibility, propsData[index].full_name, propsData[index].git_url, propsData[index].default_branch);
         })
       )
   },[])
@@ -91,12 +86,6 @@ function MenuItem(props) {
       label: 'User Name',
     },
     {
-      id: 'full_name',
-      numeric: false,
-      disablePadding: false,
-      label: 'Repo type',
-    },
-    {
       id: 'fat',
       numeric: false,
       disablePadding: false,
@@ -112,7 +101,13 @@ function MenuItem(props) {
       id: 'protein',
       numeric: false,
       disablePadding: false,
-      label: 'Rating',
+      label: 'branch',
+    },
+    {
+      id: 'full_name',
+      numeric: false,
+      disablePadding: false,
+      label: 'download',
     },
   ];
 
@@ -244,6 +239,20 @@ function MenuItem(props) {
     setPage(0);
   };
 
+  const downloadFile = async (full_name,branch) =>{
+
+    try {
+      let url = `https://raw.githubusercontent.com/${full_name.split("/")[0]}/${full_name.split("/")[1]}/${branch}/README.md`;
+       await axios.get(url).then((res) => {
+      console.log(res);
+      fileDownload(res.data, `${full_name.split("/")[1]}_README.md`);
+      });
+  
+  } catch (error) {
+    console.log(error);
+  }
+  }
+
   const isSelected = (name) => selected.indexOf(name) !== -1;
   return (
     <div>
@@ -293,10 +302,11 @@ function MenuItem(props) {
                       >
                         {row?.name}
                       </TableCell>
-                      <TableCell align="right">{row?.full_name}</TableCell>
                       <TableCell align="right">{row?.fat}</TableCell>
                       <TableCell align="right">{row?.carbs}</TableCell>
                       <TableCell align="right">{row?.protein}</TableCell>
+                      <TableCell align="right" onClick={()=>downloadFile(row?.fat,row?.protein)}>
+                        <button className="searchButton">Readme</button></TableCell>
                     </TableRow>
                   );
                 })}
