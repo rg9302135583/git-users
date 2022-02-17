@@ -64,10 +64,11 @@ function Menu() {
 
 
   return (
-    <div style={{backgroundImage: `url(${BannerImage})`,minHeight:`100vh`}}>
-          <h4>Please enter GitHub Username to find the public repositories of user.</h4>
-        <div className="search" >
-          <input
+    <div style={{backgroundImage: `url(${BannerImage})`,minHeight:`100vh`, marginTop:0}}>
+        <div>
+        <h4>Please enter GitHub Username to find the public repositories of user.</h4><br></br>
+        <div className="search">
+        <input
             type="search"
             placeholder="User's Id or emailId.."
             id="search"
@@ -77,6 +78,8 @@ function Menu() {
           <button className="searchButton" onClick={gerUserInfo}>
             Search
           </button>
+        </div>
+          
         </div>
       
       {/* This the the  details page */}
